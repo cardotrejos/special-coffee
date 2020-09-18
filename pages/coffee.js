@@ -13,10 +13,10 @@ const MotionBox = motion.custom(Box)
 export default function Home() {
   const { data, error } = useSWR(
     `{
-      allBrands{
+      allCoffees{
         id
         name
-        city
+        profile
         image {
           publicUrl
         }
@@ -43,7 +43,7 @@ export default function Home() {
 
       </main>
       <Flex alignItems="center" justifyContent="center">
-        {data.allBrands.map((brand) => {
+        {data.allCoffees.map((coffee) => {
           return (
             <MotionBox
               w='300px'
@@ -51,13 +51,14 @@ export default function Home() {
               margin="2%"
               overflow='hidden'
               boxShadow='md'
-              key={brand.id}
+              key={coffee.id}
               whileHover={{ scale: 1.1 }}
               bg='gray.200'>
-              <Image src={brand.image.publicUrl} alt="producer photo" />
+              <Image src={coffee.image.publicUrl} alt="producer photo" />
               <Box>
-                <Text fontWeight={'bold'} padding="3%">{brand.name}</Text>
-                <Text padding="3%">{brand.city}</Text>
+                <Text fontWeight={'bold'} padding="3%">{coffee.name}</Text>
+                <Text fontWeight={'bold'} padding="3%">Variedad:</Text>
+                <Text padding="3%">Perfil de sabor: {coffee.profile}</Text>
               </Box>
 
             </MotionBox>
